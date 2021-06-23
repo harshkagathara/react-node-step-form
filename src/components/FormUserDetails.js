@@ -1,18 +1,30 @@
-import React, { Component } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export class FormUserDetails extends Component {
-  continue = e => {
-    e.preventDefault();
-    this.props.nextStep();
-  };
+const FormUserDetails = (values, handleChange) => {
+  let History = useHistory();
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    rollno: ''
+  });
+  const { name, rollno, email } = user;
 
-  render() {
-    const { values, handleChange } = this.props;
+  const onInputChange = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  }
+
+  const onsubmit = async e => {
+    e.preventDefault();
+    await axios.post('http://localhost:4000/students/create-student', user);
+    History.push('/');
+  }
     return (
       <MuiThemeProvider>
         <>
@@ -26,6 +38,7 @@ export class FormUserDetails extends Component {
               placeholder="Enter Your First Name"
               label="First Name"
               onChange={handleChange('firstName')}
+              onChange={e => onInputChange(e)}
               defaultValue={values.firstName}
               margin="normal"
               fullWidth
@@ -35,6 +48,7 @@ export class FormUserDetails extends Component {
               placeholder="Enter Your Last Name"
               label="Last Name"
               onChange={handleChange('lastName')}
+              onChange={e => onInputChange(e)}
               defaultValue={values.lastName}
               margin="normal"
               fullWidth
@@ -44,6 +58,7 @@ export class FormUserDetails extends Component {
               placeholder="Enter Your Email"
               label="Email"
               onChange={handleChange('email')}
+              onChange={e => onInputChange(e)}
               defaultValue={values.email}
               margin="normal"
               fullWidth
@@ -59,6 +74,6 @@ export class FormUserDetails extends Component {
       </MuiThemeProvider>
     );
   }
-}
+
 
 export default FormUserDetails;
