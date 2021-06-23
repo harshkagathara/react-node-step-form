@@ -1,6 +1,6 @@
 # React Step Form
 
-> Form with multiple steps and confirmation. Frontend only, no API. Uses Material UI
+> Form with multiple steps and confirmation, Uses Material UI
 
 ## Quick Start
 
@@ -15,17 +15,4 @@ npm start
 npm run build
 ```
 
-## App Info
-
-### Author
-
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
-
-### Version
-
-1.0.0
-
-### License
-
-This project is licensed under the MIT License
+![image](https://user-images.githubusercontent.com/49555360/123147719-fff1c500-d47c-11eb-9842-daedba6c1ef2.png)
